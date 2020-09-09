@@ -1,0 +1,42 @@
+
+Reading point set file: ../../tsplib-data/rp10.tsp
+Number of points according to header: 100
+Finished reading point set file.
+
+Computing distance table... done.
+Expecting 4850 checks per 2-opt best-improvement iteration.
+Starting hill-climbing optimization:
+Initial tour length: 3684
+2-opt checks: 4850
+Iteration 1 final tour length: 3362 (improvement since last update: 322)
+2-opt checks: 4850
+Iteration 2 final tour length: 3040 (improvement since last update: 322)
+2-opt checks: 4850
+Iteration 3 final tour length: 2718 (improvement since last update: 322)
+2-opt checks: 4850
+Iteration 4 final tour length: 2396 (improvement since last update: 322)
+2-opt checks: 4850
+Iteration 5 final tour length: 2160 (improvement since last update: 236)
+2-opt checks: 4850
+Iteration 6 final tour length: 2142 (improvement since last update: 18)
+2-opt checks: 4850
+Iteration 7 final tour length: 2120 (improvement since last update: 22)
+2-opt checks: 4850
+Iteration 8 final tour length: 2102 (improvement since last update: 18)
+2-opt checks: 4850
+Iteration 9 final tour length: 2080 (improvement since last update: 22)
+2-opt checks: 4850
+Iteration 10 final tour length: 2065 (improvement since last update: 15)
+2-opt checks: 4850
+Iteration 11 final tour length: 2040 (improvement since last update: 25)
+2-opt checks: 4850
+Iteration 12 final tour length: 2025 (improvement since last update: 15)
+2-opt checks: 4850
+Iteration 13 final tour length: 2000 (improvement since last update: 25)
+2-opt checks: 4850
+Iteration 14 final tour length: 2000 (improvement since last update: 0)
+2-optimal solution found.
+2-opt checks: 4850
+Iteration 15 final tour length: 2000 (improvement since last update: 0)
+2-optimal solution found.
+Local optimum reached.

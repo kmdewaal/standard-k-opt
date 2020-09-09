@@ -9,6 +9,8 @@
 
 #include <iostream>
 #include <vector>
+#include <iomanip>
+#include <chrono>
 
 int main(int argc, char** argv)
 {
@@ -44,6 +46,14 @@ int main(int argc, char** argv)
         auto length = dt.lookup_length(id, next[id]);
         segments.insert({id, next[id], length});
     }
+
+    // KdW print results
+    // std::cout << "Old segments:" << std::endl;
+    // for (auto & segref : segments)
+    // {
+    //     std::cout << segref << std::endl;
+    // }
+
     // Hill climbing optimization loop.
     Optimizer optimizer(dt, point_sequence.sequence_ids());
     const auto n = point_set.x().size();
@@ -53,10 +63,13 @@ int main(int argc, char** argv)
     std::cout << "Initial tour length: " << prev_length << std::endl;
     primitives::length_t cycle_improvement{0};
     int iteration{1};
+
+    auto t0 = std::chrono::high_resolution_clock::now();
     do
     {
         cycle_improvement = 0;
-        for (size_t k{2}; k < 5; ++k)
+        // for (size_t k{2}; k < 5; ++k)
+        for (size_t k{3}; k < 4; ++k)       // KdW test
         {
             optimizer.k(k);
             primitives::length_t improvement{0};
@@ -93,6 +106,9 @@ int main(int argc, char** argv)
                 ++iteration;
             } while (improvement > 0);
             std::cout << k << "-optimal solution found." << std::endl;
+            auto t1 = std::chrono::high_resolution_clock::now();
+            auto td = std::chrono::duration_cast<std::chrono::microseconds>(t1 - t0).count();
+            std::cout << "Execution time since start: " << td << " microseconds" << std::endl;
         }
     } while (cycle_improvement > 0);
     if (cycle_improvement == 0)
@@ -103,5 +119,40 @@ int main(int argc, char** argv)
     {
         std::cout << "Hill-climbing optimization prematurely stopped." << std::endl;
     }
+
+    // KdW print results
+
+    // std::cout << "Original route:" << std::endl;
+    // for (primitives::point_id_t i{0}; i < point_set.count(); ++i)
+    // {
+    //     std::cout << i << " " << tour[i] << "  " << point_set.x()[i] << "  " << point_set.y()[i] << std::endl;
+    // }
+
+    // std::cout << "New segments:" << std::endl;
+    // for (auto & segref : segments)
+    // {
+    //     std::cout << segref << std::endl;
+    // }
+
+    std::vector<int> np;
+    np.resize(point_set.count());
+    for (auto & segref : segments)
+    {
+        // std::cout << "segref.a:" << segref.a << "  segref.b:" << segref.b << std::endl;
+        np[segref.a] = segref.b;
+    }
+
+    // std::cout << "Size of np:" << np.size() << std::endl;
+
+    // Complete route, sorted
+    // std::cout << "Sorted array: i, np[i], x[np[i]], y[np[i]]" << std::endl;
+    // for (size_t i = 0; i< np.size(); i++)
+    // {
+    //     std::cout << std::setw(5) << i << "  ";
+    //     std::cout << std::setw(5) << np[i] << "  ";
+    //     std::cout << std::setw(5) << point_set.x()[np[i]] << "  ";
+    //     std::cout << std::setw(5) << point_set.y()[np[i]] << std::endl;
+    // }
+
     return 0;
 }
